@@ -8,6 +8,11 @@
     "backgroundColor": "#0B0B0F",
     "android": {
       "package": "com.financepro.app"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "58bd4f07-3109-428c-bbf2-c04686208a22"
+      }
     }
   }
 }
