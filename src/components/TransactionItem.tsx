@@ -18,7 +18,7 @@ export default function TransactionItem({ item, onDelete }: Props) {
     ]);
 
   return (
-    <Pressable onLongPress={onDelete ? confirmDelete : undefined} style={styles.row}>
+    <View style={styles.row}>
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{item.description || item.category}</Text>
         <Text style={styles.sub}>{item.category} · {formatDate(item.date)}</Text>
@@ -26,7 +26,12 @@ export default function TransactionItem({ item, onDelete }: Props) {
       <Text style={[styles.amount, { color: isIncome ? colors.income : colors.expense }]}>
         {isIncome ? '+' : '-'} {formatCurrency(item.amount)}
       </Text>
-    </Pressable>
+      {onDelete && (
+        <Pressable onPress={confirmDelete} style={styles.delete} hitSlop={8}>
+          <Text style={styles.deleteText}>✕</Text>
+        </Pressable>
+      )}
+    </View>
   );
 }
 
@@ -39,4 +44,9 @@ const styles = StyleSheet.create({
   title: { color: colors.textPrimary, fontSize: font.body, fontWeight: '600' },
   sub: { color: colors.textSecondary, fontSize: font.small, marginTop: 2 },
   amount: { fontSize: font.body, fontWeight: '700' },
+  delete: {
+    marginLeft: spacing.md, width: 32, height: 32, borderRadius: 16,
+    backgroundColor: colors.surfaceLight, alignItems: 'center', justifyContent: 'center',
+  },
+  deleteText: { color: colors.expense, fontSize: 16, fontWeight: '700' },
 });
