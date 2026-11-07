@@ -6,7 +6,7 @@ import { colors, font, radius, spacing } from '../theme';
 import { formatCurrency } from '../utils/format';
 
 export default function HomeScreen() {
-  const { balance, income, expense, transactions } = useFinance();
+  const { balance, income, expense, transactions, removeTransaction } = useFinance();
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -33,7 +33,7 @@ export default function HomeScreen() {
         <Text style={styles.empty}>Nenhuma movimentação ainda. Toque no + para começar.</Text>
       )}
       {transactions.slice(0, 5).map((t) => (
-        <TransactionItem key={t.id} item={t} />
+        <TransactionItem key={t.id} item={t} onDelete={removeTransaction} />
       ))}
     </ScrollView>
   );
